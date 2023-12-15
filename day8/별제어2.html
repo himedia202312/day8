@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let spanArray=[];
+
+        function init(){
+            for(let a=0;a<5;a++){
+                let arr=[]; //별 10개를 담을 배열
+                                //담아놓아야, 생성 이후 시점에 얼마든지 접근이 가능
+
+                for(let i=0;i<10;i++){
+                    let span=document.createElement("span");//<span></span>
+                    span.innerText="★";//<span>★</span>
+                    document.body.appendChild(span);
+                    arr.push(span);
+
+                    //생성된 span을 대상으로 이벤트연결 
+                    span.addEventListener("click", function(){
+                        console.log("저는 ", a ,"층 ", i , " 호에 살아요");
+                        
+                        spanArray[a][i].style.color="red";
+
+                    });
+                }
+
+                //줄바꿈은 바깥쪽 for문과 관련있다..(층수와 관련있기 때문에)
+                let br=document.createElement("br");
+                document.body.appendChild(br);
+                //10개의 별을 담고  있는 arr을 spanArray에 밀어넣자
+                spanArray.push(arr);
+            }
+        }
+
+        addEventListener("load", function(){
+            init();
+        });
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+
+
+
+
+
+
+

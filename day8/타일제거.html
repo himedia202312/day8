@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrapper{
+            width: 1000px;
+            height:1000px;
+            margin: auto;
+            background-image: url(../images/Shrek/img1.jpg);
+            background-size: 1000px 1000px;
+            position: relative;
+        }
+    </style>
+    <script>
+        let wrapper;
+        let cellArray=[]; //arr 이라는 10개짜리 셀을 가진 한 줄을 담을
+                                //다차원 배열로 사용하기 위함임...
+
+        function createCell(){
+            for(let a=0;a<20;a++){
+                let arr=[];//한줄을 담을 일차원 배열
+                            //일반 변수로 10개로 받아도 되지만, 순서가 있을경우 
+                            //더 다양한 처리가 가능하므로 배열로 보관하자
+
+                for(let i=0;i<20;i++){
+                    let cell=document.createElement("div");
+                    cell.style.width=50+"px";
+                    cell.style.height=50+"px";
+                    cell.style.background="red";
+                    cell.style.position="absolute";
+                    cell.style.left=(i*50)+"px"; //호수와 관련
+                    cell.style.top=(a*50)+"px"; //층수와 관련
+                    cell.style.border="1px solid yellow";
+                    cell.style.boxSizing="border-box";
+                    
+                    cell.addEventListener("mousemove", function(){
+                        arr[i].style.opacity=0;
+                    });
+
+                    //wrapper 에 부착 
+                    wrapper.appendChild(cell);
+
+                    //생성된 셀을 배열에 보관하자 
+                    arr.push(cell);
+                }
+                cellArray.push(arr);//층 수 만큼 push
+            }
+        }
+
+        function showAll(flag){
+            //모든 존재하는 셀의 opacity값을 0으로 놓자 
+            for(let i=0;i<cellArray.length;i++){
+                for(let a=0;a<cellArray[i].length;a++){
+                    if(flag){
+                        cellArray[i][a].style.opacity=1; //보이게
+                    }else{ 
+                        cellArray[i][a].style.opacity=0; //않보기에..
+                    }
+                }
+            }
+        }
+
+        addEventListener("load", function(){
+            wrapper=document.getElementById("wrapper");
+            createCell();//사각형 생성하기
+        });
+    </script>
+</head>
+<body>
+    <button onClick="showAll(false)">그림보기</button>
+    <button onClick="showAll(true)">초기화</button>
+    <div id="wrapper"></div>
+</body>
+</html>
+
+
+
+
+
+
+
